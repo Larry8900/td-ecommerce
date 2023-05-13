@@ -7,12 +7,17 @@
 const link = document.querySelector('.link');
 const hamburger = document.querySelector('.hamburger');
 const center_link = document.querySelector('.center_link');
+const body = document.body;
 link.style.display = 'none';
-hamburger.addEventListener('click', function(){
-    link.classList.toggle('toggle');
-}
+hamburger.addEventListener('click', (element => {
+    body.classList.remove('toggle')
+   // link.style.display = "none";
+})
     
 );
+hamburger.addEventListener('click', (e => {
+    body.classList.toggle('toggle')
+}))
 
 
 
@@ -33,13 +38,11 @@ const product = document.querySelectorAll('input[name="tabset"]');
 const catalogue = document.querySelectorAll('.catalogue');
 const itemTag = document.querySelectorAll('.tag');
 const itemTagFemale = document.querySelectorAll('.female_tag');
+const search = document.querySelector('input[class="search_product"]');
+console.log(search)
 
-console.log(productTab);
-console.log(itemTag);
-
-
-productTab.forEach(product => {
-    product.addEventListener('change', (e) => {
+product.forEach(p => {
+    p.addEventListener('change', (e) => {
         if(e.target.value == 'Female' && catalogue.display != "block"){
             itemTag.forEach(element => {
                 element.parentElement.parentElement.parentElement.style.display = "none";
@@ -67,31 +70,38 @@ productTab.forEach(product => {
     })
 })
 
+ 
+    search.addEventListener('input', (value) =>{
+        catalogue.forEach(element => {
+            
+            element.style.display = "none"
+            let textInput = document.querySelector('.search_product').value.toUpperCase()
+            console.log(textInput);
+            let name = element.children[0].innerHTML.toUpperCase();
+            console.log(name)
 
-// function() {
-//     const tag_type = document.querySelectorAll('tag')
+            
+            if(name.includes(textInput)){
+                element.style.display = "block"
+            }
+        })
+    })
+// const details = (values) =>{
+//     catalogue.forEach(element => {
+//      //   element.style.display = "none";
+//         let textInput = document.querySelector('.search_product').value.toUpperCase()
+//             console.log(textInput);
+//         let name = document.querySelector('.name');
+//         console.log(catalogue) 
+//         if(name.includes(textInput) || tag.includes(textInput)){
+//             element.style.display = "block"
+//         }
+//     })
+// }
 
-//     console.log(tag_type);
+// search.addEventListener('input', (e) => {
+// details.apply(e.target.value.toUpperCase())
 // })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // const employee = document.querySelectorAll('.employee');
 
 // const displayEmployees = (values) => {
